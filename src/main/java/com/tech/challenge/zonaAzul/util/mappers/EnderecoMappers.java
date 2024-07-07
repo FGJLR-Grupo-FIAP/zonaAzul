@@ -1,11 +1,34 @@
 package com.tech.challenge.zonaAzul.util.mappers;
 
+import com.tech.challenge.zonaAzul.condutor.dto.EnderecoRecord;
 import com.tech.challenge.zonaAzul.condutor.form.EnderecoForm;
 import com.tech.challenge.zonaAzul.condutor.model.entity.Endereco;
 
 public class EnderecoMappers {
 
-    public static Endereco enderecoMapper(EnderecoForm enderecoForm){
+    public static EnderecoRecord enderecoMapperDTO(Endereco endereco){
+        EnderecoRecord enderecoRecord = new EnderecoRecord(endereco.getCep(),
+                endereco.getCidade(),
+                endereco.getLogradouro(),
+                endereco.getNumero(),
+                endereco.getBairro(),
+                endereco.getComplemento(),
+                endereco.getEstado());
+        return enderecoRecord;
+    }
+
+//    public static EnderecoRecord enderecoMapperDTO(EnderecoForm enderecoForm){
+//        EnderecoRecord endereco = new EnderecoRecord(enderecoForm.getCep(),
+//                enderecoForm.getCidade(),
+//                enderecoForm.getLogradouro(),
+//                enderecoForm.getNumero(),
+//                enderecoForm.getBairro(),
+//                enderecoForm.getComplemento(),
+//                enderecoForm.getEstado());
+//        return endereco;
+//    }
+
+    public static Endereco enderecoMapper(EnderecoForm enderecoForm) {
         Endereco endereco = new Endereco();
         endereco.setCep(enderecoForm.getCep());
         endereco.setCidade(enderecoForm.getCidade());

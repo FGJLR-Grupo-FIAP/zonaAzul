@@ -1,18 +1,46 @@
 package com.tech.challenge.zonaAzul.util.mappers;
 
+import com.tech.challenge.zonaAzul.condutor.dto.CondutorRecod;
 import com.tech.challenge.zonaAzul.condutor.form.CondutorForm;
 import com.tech.challenge.zonaAzul.condutor.model.entity.Condutor;
-import com.tech.challenge.zonaAzul.condutor.model.entity.Endereco;
-import com.tech.challenge.zonaAzul.util.enums.TipoPagamento;
-import org.bson.types.ObjectId;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import java.math.BigDecimal;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CondutorMappers {
 
-    public static Condutor condutorMapper(CondutorForm condutorForm){
+    public static CondutorRecod condutorMapperDTO(Condutor condutor) {
+        CondutorRecod condutorRecod = new CondutorRecod(condutor.getNome(),
+                condutor.getCpf(),
+                condutor.getDataNascimento(),
+                condutor.getCnh(),
+                EnderecoMappers.enderecoMapperDTO(condutor.getEndereco()),
+                condutor.getSaldo(),
+                TipoPagamentoMappers.mapper(condutor.getTipoPagamentoPrincipal()),
+                condutor.getDataHoraCadastro(),
+                null,
+                true);
+
+        return condutorRecod;
+    }
+
+
+//    public static CondutorRecod condutorMapperDTO(CondutorForm condutorForm) {
+//        CondutorRecod condutor = new CondutorRecod(condutorForm.getNome(),
+//                condutorForm.getCpf(),
+//                condutorForm.getDataNascimento(),
+//                condutorForm.getCnh(),
+//                EnderecoMappers.enderecoMapperDTO(condutorForm.getEndereco()),
+//                condutorForm.getSaldo(),
+//                TipoPagamentoMappers.mapper(condutorForm.getTipoPagamentoPrincipal()),
+//                condutorForm.getDataHoraCadastro(),
+//                null,
+//                true);
+//
+//        return condutor;
+//    }
+
+    public static Condutor condutorMapper(CondutorForm condutorForm) {
         Condutor condutor = new Condutor();
 
         condutor.setNome(condutorForm.getNome());
@@ -26,4 +54,15 @@ public class CondutorMappers {
         return condutor;
     }
 
+    public static List<CondutorRecod> condutorMapper(List<Condutor> condutorList) {
+
+        List<CondutorRecod> condutorRecodList = new ArrayList<CondutorRecod>();
+
+        condutorList.forEach(lista ->{
+            CondutorRecod condutorRecod = condutorMapperDTO(lista);
+            condutorRecodList.add(condutorRecod);
+        });
+
+        return condutorRecodList;
+    }
 }

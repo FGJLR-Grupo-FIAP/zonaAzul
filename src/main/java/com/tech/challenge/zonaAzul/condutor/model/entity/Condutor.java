@@ -27,6 +27,6 @@ public class Condutor {
     private BigDecimal saldo;
     private TipoPagamento tipoPagamentoPrincipal;
     private Date dataHoraCadastro = new Date();
-    private Date dataHoraAtualizacao = new Date();;
+    private Date dataHoraAtualizacao = new Date();
     private Boolean clienteAtivo = true;
 }
