@@ -18,27 +18,11 @@ public class CondutorMappers {
                 condutor.getSaldo(),
                 TipoPagamentoMappers.mapper(condutor.getTipoPagamentoPrincipal()),
                 condutor.getDataHoraCadastro(),
-                null,
+                condutor.getDataHoraAtualizacao(),
                 true);
 
         return condutorRecod;
     }
-
-
-//    public static CondutorRecod condutorMapperDTO(CondutorForm condutorForm) {
-//        CondutorRecod condutor = new CondutorRecod(condutorForm.getNome(),
-//                condutorForm.getCpf(),
-//                condutorForm.getDataNascimento(),
-//                condutorForm.getCnh(),
-//                EnderecoMappers.enderecoMapperDTO(condutorForm.getEndereco()),
-//                condutorForm.getSaldo(),
-//                TipoPagamentoMappers.mapper(condutorForm.getTipoPagamentoPrincipal()),
-//                condutorForm.getDataHoraCadastro(),
-//                null,
-//                true);
-//
-//        return condutor;
-//    }
 
     public static Condutor condutorMapper(CondutorForm condutorForm) {
         Condutor condutor = new Condutor();

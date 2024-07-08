@@ -17,17 +17,6 @@ public class EnderecoMappers {
         return enderecoRecord;
     }
 
-//    public static EnderecoRecord enderecoMapperDTO(EnderecoForm enderecoForm){
-//        EnderecoRecord endereco = new EnderecoRecord(enderecoForm.getCep(),
-//                enderecoForm.getCidade(),
-//                enderecoForm.getLogradouro(),
-//                enderecoForm.getNumero(),
-//                enderecoForm.getBairro(),
-//                enderecoForm.getComplemento(),
-//                enderecoForm.getEstado());
-//        return endereco;
-//    }
-
     public static Endereco enderecoMapper(EnderecoForm enderecoForm) {
         Endereco endereco = new Endereco();
         endereco.setCep(enderecoForm.getCep());
