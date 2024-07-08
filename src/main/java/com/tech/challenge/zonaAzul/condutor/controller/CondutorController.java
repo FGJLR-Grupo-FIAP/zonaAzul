@@ -25,7 +25,7 @@ public class CondutorController {
         ResponseEntity response = null;
 
         try {
-            CondutorRecod condutorRecod = service.salvar(condutor, true);
+            CondutorRecod condutorRecod = service.salvar(condutor);
             response = ResponseEntity.status(HttpStatus.CREATED).body(condutorRecod);
         }catch (Exception e){
             return null;
@@ -44,5 +44,37 @@ public class CondutorController {
             return null;
         }
         return response;
+    }
+
+    @GetMapping("/{cpf}")
+    public ResponseEntity<CondutorRecod> condutor(@PathVariable String cpf){
+        ResponseEntity response = null;
+
+        try {
+            CondutorRecod condutor = service.condutor(cpf);
+            response = ResponseEntity.status(HttpStatus.OK).body(condutor);
+        }catch (Exception e){
+            return null;
+        }
+
+        return response;
+    }
+
+    @PutMapping("/editar")
+    public ResponseEntity<CondutorRecod> editarCondutor(@RequestBody CondutorForm condutorForm){
+        ResponseEntity response = null;
+
+        try {
+            CondutorRecod condutor = service.editarDadosCondutor(condutorForm);
+        }catch (Exception e){
+            return null;
+        }
+        return response;
+    }
+
+    @DeleteMapping("deletar={cpf}")
+    public ResponseEntity deletarCondutor(@PathVariable String cpf){
+        service.deletarCondutor(cpf);
+        return ResponseEntity.ok("Cadastro deletado com sucesso!");
     }
 }
