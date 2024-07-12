@@ -1,12 +1,12 @@
 package com.tech.challenge.zonaAzul.util.exception;
 
-public class NoSuchRecordException extends Exception{
+public class NoSuchRecordException extends RuntimeException {
 
     NoSuchRecordException(){
         super("Registro nao encontrado");
     }
 
-    NoSuchRecordException(String message){
+    public NoSuchRecordException(String message){
         super(message);
     }
 

@@ -2,7 +2,7 @@ package com.tech.challenge.zonaAzul.condutor.model.service;
 
 import com.tech.challenge.zonaAzul.condutor.dto.CondutorRecod;
 import com.tech.challenge.zonaAzul.condutor.form.CondutorForm;
-import com.tech.challenge.zonaAzul.condutor.model.CondutorRepository;
+import com.tech.challenge.zonaAzul.condutor.model.repository.CondutorRepository;
 import com.tech.challenge.zonaAzul.condutor.model.entity.Condutor;
 import com.tech.challenge.zonaAzul.util.exception.ConductorAlreadyExistsException;
 import com.tech.challenge.zonaAzul.util.exception.NoSuchRecordException;
@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 

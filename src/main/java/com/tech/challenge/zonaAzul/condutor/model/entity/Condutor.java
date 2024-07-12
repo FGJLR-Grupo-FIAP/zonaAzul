@@ -1,11 +1,10 @@
 package com.tech.challenge.zonaAzul.condutor.model.entity;
 
 import com.tech.challenge.zonaAzul.util.enums.TipoPagamento;
-import jakarta.persistence.*;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigDecimal;
@@ -18,7 +17,7 @@ import java.util.Date;
 public class Condutor {
 
     @Id
-    private String id = new ObjectId().toString();
+    private String id;
     private String nome;
     private String cpf;
     private Date dataNascimento;
