@@ -3,6 +3,7 @@ package com.tech.challenge.zonaAzul.condutor.controller;
 import com.tech.challenge.zonaAzul.condutor.dto.TicketRecord;
 import com.tech.challenge.zonaAzul.condutor.form.TicketForm;
 import com.tech.challenge.zonaAzul.condutor.model.service.TicketService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +25,12 @@ public class TicketController {
         return ResponseEntity.ok().body(ticketsRecordList);
     }
 
+    @GetMapping("/condutor/{cpf}")
+    public ResponseEntity<List<TicketRecord>> obterTicketsPorCondutor(@PathVariable String cpf) {
+        List<TicketRecord> ticketRecordList = service.obterTicketsPorCondutor(cpf);
+        return ResponseEntity.ok().body(ticketRecordList);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<TicketRecord> obterPorId(@PathVariable String id) {
         TicketRecord ticketRecord = service.obterPorId(id);
@@ -31,14 +38,14 @@ public class TicketController {
     }
 
     @PostMapping("/salvar")
-    public ResponseEntity<TicketRecord> salvar(@RequestBody TicketForm ticketForm) {
+    public ResponseEntity<TicketRecord> salvar(@Valid @RequestBody TicketForm ticketForm) {
         TicketRecord ticketRecord = service.salvar(ticketForm);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(ticketRecord.id()).toUri();
         return ResponseEntity.created(uri).build();
     }
 
     @PutMapping("/editar/{id}")
-    public ResponseEntity<TicketRecord> editar(@RequestBody TicketForm ticketForm, @PathVariable String id) {
+    public ResponseEntity<TicketRecord> editar(@Valid @RequestBody TicketForm ticketForm, @PathVariable String id) {
         TicketRecord ticketRecord = service.editar(ticketForm, id);
         return ResponseEntity.ok().body(ticketRecord);
     }
