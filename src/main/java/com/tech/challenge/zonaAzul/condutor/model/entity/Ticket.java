@@ -1,5 +1,6 @@
 package com.tech.challenge.zonaAzul.condutor.model.entity;
 
+import com.tech.challenge.zonaAzul.condutor.dto.UsuarioRecordDTO;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,6 +22,7 @@ public class Ticket {
     private Date dataHoraEntrada;
     private Date dataHoraSaida;
     private BigDecimal valor;
+    private UsuarioRecordDTO condutor;
 
     public boolean isPeriodoEstacionamentoFixo() {
         return Objects.nonNull(dataHoraEntrada) && Objects.isNull(dataHoraSaida);
