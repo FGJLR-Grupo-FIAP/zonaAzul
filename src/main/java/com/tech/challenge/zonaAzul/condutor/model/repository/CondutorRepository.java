@@ -1,4 +1,4 @@
-package com.tech.challenge.zonaAzul.condutor.model;
+package com.tech.challenge.zonaAzul.condutor.model.repository;
 
 import com.tech.challenge.zonaAzul.condutor.model.entity.Condutor;
 import org.springframework.data.mongodb.repository.MongoRepository;
