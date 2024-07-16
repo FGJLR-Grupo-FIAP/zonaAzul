@@ -8,13 +8,13 @@ import jakarta.transaction.Status;
 
 
 @Entity
-@Table(name = "vaga" )
+@Table(name = "tb_vaga")
 public class Vaga {
 
     @Id
     private Long id;
     private String local;
-    private Status statusVga;
+    private Status statusVaga;
 
     public Vaga() {
     }
@@ -22,7 +22,7 @@ public class Vaga {
     public Vaga(Long id, String local, Status statusVga) {
         this.id = id;
         this.local = local;
-        this.statusVga = statusVga;
+        this.statusVaga = statusVga;
     }
 
 
@@ -42,11 +42,11 @@ public class Vaga {
         this.local = local;
     }
 
-    public Status getStatusVga() {
-        return statusVga;
+    public Status getStatusVaga() {
+        return statusVaga;
     }
 
-    public void setStatusVga(Status statusVga) {
-        this.statusVga = statusVga;
+    public void setStatusVaga(Status statusVga) {
+        this.statusVaga = statusVga;
     }
 }
