@@ -71,6 +71,19 @@ public final class CustomizedResponseExceptionHandler {
         return ResponseEntity.status(status).body(error);
     }
 
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<StandardError> illegalArgumentException(IllegalArgumentException ex, HttpServletRequest request) {
+        final HttpStatus status = HttpStatus.BAD_REQUEST;
+        final StandardError error = new StandardError(
+                System.currentTimeMillis(),
+                status.value(),
+                "Erro na validação de argumento",
+                ex.getMessage(),
+                request.getRequestURI()
+        );
+        return ResponseEntity.status(status).body(error);
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<StandardError> genericError(Exception ex, HttpServletRequest request) {
         ex.printStackTrace();

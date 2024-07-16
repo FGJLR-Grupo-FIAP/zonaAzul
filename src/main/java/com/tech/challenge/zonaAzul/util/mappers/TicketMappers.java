@@ -22,8 +22,6 @@ public class TicketMappers {
 
     public static Ticket ticketMapper(TicketForm ticketForm) {
         Ticket ticket = new Ticket();
-        ticket.setDataHoraSaida(ticketForm.getDataHoraSaida());
-        ticket.setValor(ticketForm.getValor());
         ticket.setPagamento(PagamentoMappers.pagamentoMapper(ticketForm.getPagamento()));
         return ticket;
     }
