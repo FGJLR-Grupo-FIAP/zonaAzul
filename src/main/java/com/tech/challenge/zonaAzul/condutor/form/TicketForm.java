@@ -1,5 +1,6 @@
 package com.tech.challenge.zonaAzul.condutor.form;
 
+import com.tech.challenge.zonaAzul.util.enums.TipoPagamento;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -21,5 +22,7 @@ public class TicketForm {
     @NotEmpty(message = "O CPF do condutor é um registro obrigatório para realizar a compra do ticket")
     @Size(min = 11, max = 11, message = "O CPF deve conter {max} caracteres")
     private String cpfCondutor;
+
+    private PagamentoForm pagamento;
 
 }

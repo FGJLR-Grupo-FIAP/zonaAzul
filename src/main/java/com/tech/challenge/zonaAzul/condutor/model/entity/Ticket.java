@@ -23,6 +23,7 @@ public class Ticket {
     private Date dataHoraSaida;
     private BigDecimal valor;
     private UsuarioRecordDTO condutor;
+    private Pagamento pagamento;
 
     public boolean isPeriodoEstacionamentoFixo() {
         return Objects.nonNull(dataHoraEntrada) && Objects.isNull(dataHoraSaida);

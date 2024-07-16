@@ -73,6 +73,7 @@ public final class CustomizedResponseExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<StandardError> genericError(Exception ex, HttpServletRequest request) {
+        ex.printStackTrace();
         final HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
         final StandardError error = new StandardError(
                 System.currentTimeMillis(),
