@@ -7,6 +7,7 @@ import com.tech.challenge.zonaAzul.condutor.model.entity.Condutor;
 import com.tech.challenge.zonaAzul.condutor.model.entity.Ticket;
 import com.tech.challenge.zonaAzul.condutor.model.repository.CondutorRepository;
 import com.tech.challenge.zonaAzul.condutor.model.repository.TicketRepository;
+import com.tech.challenge.zonaAzul.util.DataUtils;
 import com.tech.challenge.zonaAzul.util.exception.DatabaseException;
 import com.tech.challenge.zonaAzul.util.exception.NoSuchRecordException;
 import com.tech.challenge.zonaAzul.util.exception.ValidationRegisterTicketException;
@@ -60,12 +61,11 @@ public class TicketService {
 
     public TicketRecord salvar(TicketForm ticketForm) {
         Ticket ticketEntidade = TicketMappers.ticketMapper(ticketForm);
-        ticketEntidade.setDataHoraEntrada(new Date());
+        ticketEntidade.setDataHoraEntrada(DataUtils.obterDataHoraCorrente());
+        atribuirTempoSaidaECalcularValorTotalCasoTempoFixoInformado(ticketForm, ticketEntidade);
 
         Condutor condutor = condutorRepository.findByCpf(ticketForm.getCpfCondutor());
-        validarCadastroCondutor(condutor, false);
-        ticketEntidade.setCondutor(new UsuarioRecordDTO(condutor.getNome(), condutor.getCpf()));
-        pagamentoService.autorizarPagamento(ticketEntidade.getPagamento());
+        processarDemaisValidacoes(condutor, ticketEntidade);
 
         try {
             ticketEntidade = repository.insert(ticketEntidade);
@@ -79,17 +79,13 @@ public class TicketService {
     public TicketRecord editar(TicketForm ticketForm, String id) {
         Ticket ticketEntidade = repository.findById(id)
                 .orElseThrow(() -> new NoSuchRecordException("Não há ticket cadastrado no sistema com o id informado."));
-        ticketEntidade.setDataHoraSaida(ticketForm.getDataHoraSaida());
-        ticketEntidade.setValor(ticketForm.getValor());
-        pagamentoService.autorizarPagamento(ticketEntidade.getPagamento());
+        atribuirTempoSaidaECalcularValorTotalCasoTempoFixoInformado(ticketForm, ticketEntidade);
 
         Condutor condutor = condutorRepository.findByCpf(ticketForm.getCpfCondutor());
-        validarCadastroCondutor(condutor, true);
-        ticketEntidade.setCondutor(new UsuarioRecordDTO(condutor.getNome(), condutor.getCpf()));
-
         if (!ticketForm.getCpfCondutor().equals(condutor.getCpf())) {
             throw new ValidationRegisterTicketException("Não é possível atualizar um ticket com condutor diferente do informado na hora da compra do mesmo");
         }
+        processarDemaisValidacoes(condutor, ticketEntidade);
 
         try {
             ticketEntidade = repository.save(ticketEntidade);
@@ -98,6 +94,24 @@ public class TicketService {
         } catch (Exception e) {
             throw new DatabaseException("Não foi possível realizar e edição. ", e);
         }
+    }
+
+    private void atribuirTempoSaidaECalcularValorTotalCasoTempoFixoInformado(TicketForm ticketForm, Ticket ticketEntidade) {
+        final Integer horaInformada = ticketForm.getQuantidadeHoras();
+        if (Objects.nonNull(horaInformada)) {
+            if (ticketForm.getQuantidadeHoras() < 1) {
+                throw new ValidationRegisterTicketException("Não foi possível registrar compra do ticket, pois a quantidade de horas informada é menor que 1 hora.");
+            }
+            final Date dataHoraSaida = DataUtils.obterDataHoraComHoraIncrementada((Date) ticketEntidade.getDataHoraEntrada().clone(), horaInformada);
+            ticketEntidade.setDataHoraSaida(dataHoraSaida);
+            ticketEntidade.calcularValor(horaInformada);
+        }
+    }
+
+    private void processarDemaisValidacoes(Condutor condutor, Ticket ticketEntidade) {
+        validarCadastroCondutor(condutor, false);
+        ticketEntidade.setCondutor(new UsuarioRecordDTO(condutor.getNome(), condutor.getCpf()));
+        pagamentoService.autorizarPagamento(ticketEntidade.getPagamento());
     }
 
     private void associarCondutorAoTicket(Ticket ticketEntidade, Condutor condutor) {
