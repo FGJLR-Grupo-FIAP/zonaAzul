@@ -15,7 +15,8 @@ public class TicketMappers {
                 ticket.getDataHoraEntrada(),
                 ticket.getDataHoraSaida(),
                 ticket.getValor(),
-                ticket.isPeriodoEstacionamentoFixo()
+                ticket.isPeriodoEstacionamentoFixo(),
+                PagamentoMappers.pagamentoMapperDTO(ticket.getPagamento())
         );
     }
 
@@ -23,6 +24,7 @@ public class TicketMappers {
         Ticket ticket = new Ticket();
         ticket.setDataHoraSaida(ticketForm.getDataHoraSaida());
         ticket.setValor(ticketForm.getValor());
+        ticket.setPagamento(PagamentoMappers.pagamentoMapper(ticketForm.getPagamento()));
         return ticket;
     }
 

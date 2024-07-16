@@ -13,8 +13,7 @@ import org.bson.types.ObjectId;
 @NoArgsConstructor
 public class Pagamento {
 
-    @Id
-    private String id = new ObjectId().toString();
     private StatusPagamento statusPagamento;
     private TipoPagamento formaPagamento;
+
 }

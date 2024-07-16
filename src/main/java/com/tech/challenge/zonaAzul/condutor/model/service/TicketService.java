@@ -31,6 +31,9 @@ public class TicketService {
     @Autowired
     private CondutorRepository condutorRepository;
 
+    @Autowired
+    private PagamentoService pagamentoService;
+
     public List<TicketRecord> listarTodosTickets() {
         List<Ticket> ticketList = repository.findAll();
         validarTicketsConsultados(ticketList);
@@ -61,10 +64,13 @@ public class TicketService {
 
         Condutor condutor = condutorRepository.findByCpf(ticketForm.getCpfCondutor());
         validarCadastroCondutor(condutor, false);
-        associarCondutorAoTicket(ticketEntidade, condutor);
+        ticketEntidade.setCondutor(new UsuarioRecordDTO(condutor.getNome(), condutor.getCpf()));
+        pagamentoService.autorizarPagamento(ticketEntidade.getPagamento());
 
         try {
-            return TicketMappers.ticketMapperDTO(repository.insert(ticketEntidade));
+            ticketEntidade = repository.insert(ticketEntidade);
+            associarCondutorAoTicket(ticketEntidade, condutor);
+            return TicketMappers.ticketMapperDTO(ticketEntidade);
         } catch (Exception e) {
             throw new DatabaseException("Não foi possível persistir o ticket. ", e);
         }
@@ -75,23 +81,26 @@ public class TicketService {
                 .orElseThrow(() -> new NoSuchRecordException("Não há ticket cadastrado no sistema com o id informado."));
         ticketEntidade.setDataHoraSaida(ticketForm.getDataHoraSaida());
         ticketEntidade.setValor(ticketForm.getValor());
+        pagamentoService.autorizarPagamento(ticketEntidade.getPagamento());
 
         Condutor condutor = condutorRepository.findByCpf(ticketForm.getCpfCondutor());
         validarCadastroCondutor(condutor, true);
+        ticketEntidade.setCondutor(new UsuarioRecordDTO(condutor.getNome(), condutor.getCpf()));
+
         if (!ticketForm.getCpfCondutor().equals(condutor.getCpf())) {
             throw new ValidationRegisterTicketException("Não é possível atualizar um ticket com condutor diferente do informado na hora da compra do mesmo");
         }
-        associarCondutorAoTicket(ticketEntidade, condutor);
 
         try {
-            return TicketMappers.ticketMapperDTO(repository.save(ticketEntidade));
+            ticketEntidade = repository.save(ticketEntidade);
+            associarCondutorAoTicket(ticketEntidade, condutor);
+            return TicketMappers.ticketMapperDTO(ticketEntidade);
         } catch (Exception e) {
             throw new DatabaseException("Não foi possível realizar e edição. ", e);
         }
     }
 
     private void associarCondutorAoTicket(Ticket ticketEntidade, Condutor condutor) {
-        ticketEntidade.setCondutor(new UsuarioRecordDTO(condutor.getNome(), condutor.getCpf()));
         condutor.getTickets().add(ticketEntidade);
         condutorRepository.save(condutor);
     }

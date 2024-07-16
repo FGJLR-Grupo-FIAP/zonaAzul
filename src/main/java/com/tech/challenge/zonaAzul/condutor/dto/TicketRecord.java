@@ -7,5 +7,6 @@ public record TicketRecord(String id,
                            Date dataHoraEntrada,
                            Date dataHoraSaida,
                            BigDecimal valor,
-                           boolean periodoEstacionamentoFixo) {
+                           boolean periodoEstacionamentoFixo,
+                           PagamentoRecord pagamento) {
 }
