@@ -1,5 +1,6 @@
-package com.tech.challenge.zonaAzul.condutor.form;
+package com.tech.challenge.zonaAzul.ticket.form;
 
+import com.tech.challenge.zonaAzul.ticket.pagamento.form.PagamentoForm;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;

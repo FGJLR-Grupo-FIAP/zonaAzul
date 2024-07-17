@@ -1,5 +1,6 @@
 package com.tech.challenge.zonaAzul.condutor.model.entity;
 
+import com.tech.challenge.zonaAzul.ticket.model.entity.Ticket;
 import com.tech.challenge.zonaAzul.util.enums.TipoPagamento;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;

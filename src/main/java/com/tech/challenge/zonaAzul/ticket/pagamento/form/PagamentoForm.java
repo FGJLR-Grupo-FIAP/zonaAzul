@@ -1,4 +1,4 @@
-package com.tech.challenge.zonaAzul.condutor.form;
+package com.tech.challenge.zonaAzul.ticket.pagamento.form;
 
 import com.tech.challenge.zonaAzul.util.enums.TipoPagamento;
 import lombok.AllArgsConstructor;

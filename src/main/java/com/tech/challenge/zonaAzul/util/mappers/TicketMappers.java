@@ -1,11 +1,10 @@
 package com.tech.challenge.zonaAzul.util.mappers;
 
-import com.tech.challenge.zonaAzul.condutor.dto.TicketRecord;
-import com.tech.challenge.zonaAzul.condutor.form.TicketForm;
-import com.tech.challenge.zonaAzul.condutor.model.entity.Ticket;
+import com.tech.challenge.zonaAzul.ticket.dto.TicketRecord;
+import com.tech.challenge.zonaAzul.ticket.form.TicketForm;
+import com.tech.challenge.zonaAzul.ticket.model.entity.Ticket;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class TicketMappers {
 

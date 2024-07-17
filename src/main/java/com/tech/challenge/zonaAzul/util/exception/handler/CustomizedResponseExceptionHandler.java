@@ -1,7 +1,5 @@
-package com.tech.challenge.zonaAzul.condutor.controller.exception.handler;
+package com.tech.challenge.zonaAzul.util.exception.handler;
 
-import com.tech.challenge.zonaAzul.condutor.controller.exception.StandardError;
-import com.tech.challenge.zonaAzul.condutor.controller.exception.ValidationError;
 import com.tech.challenge.zonaAzul.util.exception.DatabaseException;
 import com.tech.challenge.zonaAzul.util.exception.NoSuchRecordException;
 import com.tech.challenge.zonaAzul.util.exception.ValidationRegisterTicketException;

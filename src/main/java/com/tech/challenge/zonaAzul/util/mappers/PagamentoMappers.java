@@ -1,8 +1,8 @@
 package com.tech.challenge.zonaAzul.util.mappers;
 
-import com.tech.challenge.zonaAzul.condutor.dto.PagamentoRecord;
-import com.tech.challenge.zonaAzul.condutor.form.PagamentoForm;
-import com.tech.challenge.zonaAzul.condutor.model.entity.Pagamento;
+import com.tech.challenge.zonaAzul.ticket.pagamento.dto.PagamentoRecord;
+import com.tech.challenge.zonaAzul.ticket.pagamento.form.PagamentoForm;
+import com.tech.challenge.zonaAzul.ticket.pagamento.model.entity.Pagamento;
 import com.tech.challenge.zonaAzul.util.enums.StatusPagamento;
 
 public class PagamentoMappers {

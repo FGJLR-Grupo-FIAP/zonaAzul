@@ -1,6 +1,7 @@
-package com.tech.challenge.zonaAzul.condutor.model.entity;
+package com.tech.challenge.zonaAzul.ticket.model.entity;
 
-import com.tech.challenge.zonaAzul.condutor.dto.UsuarioRecordDTO;
+import com.tech.challenge.zonaAzul.ticket.dto.UsuarioRecordDTO;
+import com.tech.challenge.zonaAzul.ticket.pagamento.model.entity.Pagamento;
 import com.tech.challenge.zonaAzul.util.Consts.ZonaAzulConst;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
