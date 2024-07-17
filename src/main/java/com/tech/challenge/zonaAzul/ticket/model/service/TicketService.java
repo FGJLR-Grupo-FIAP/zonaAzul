@@ -98,20 +98,16 @@ public class TicketService {
     }
 
     private void atribuirTempoSaidaECalcularValorTotalCasoTempoFixoInformado(TicketForm ticketForm, Ticket ticketEntidade) {
-        final Integer horaInformada = ticketForm.getQuantidadeHoras();
-        if (Objects.nonNull(horaInformada)) {
-            if (ticketForm.getQuantidadeHoras() < 1) {
-                throw new ValidationRegisterTicketException("Não foi possível registrar compra do ticket, pois a quantidade de horas informada é menor que 1 hora.");
-            }
-            final Date dataHoraSaida = DataUtils.obterDataHoraComHoraIncrementada((Date) ticketEntidade.getDataHoraEntrada().clone(), horaInformada);
-            ticketEntidade.setDataHoraSaida(dataHoraSaida);
-            ticketEntidade.calcularValor(horaInformada);
-        }
+        final int horaInformada = Objects.nonNull(ticketForm.getQuantidadeHoras()) ? ticketForm.getQuantidadeHoras().intValue() : 1;
+        final Date dataHoraSaida = DataUtils.obterDataHoraComHoraIncrementada((Date) ticketEntidade.getDataHoraEntrada().clone(), horaInformada);
+        ticketEntidade.setDataHoraSaida(dataHoraSaida);
+        ticketEntidade.calcularValor(horaInformada);
     }
 
     private void processarValidacoesComplementares(Condutor condutor, Ticket ticketEntidade) {
         validarCadastroCondutor(condutor, false);
         ticketEntidade.setCondutor(new UsuarioRecordDTO(condutor.getNome(), condutor.getCpf()));
+        pagamentoService.validarFormaPagamento(ticketEntidade.getPagamento().getFormaPagamento(), ticketEntidade.isPeriodoEstacionamentoFixo());
         pagamentoService.autorizarPagamento(ticketEntidade.getPagamento());
     }
 

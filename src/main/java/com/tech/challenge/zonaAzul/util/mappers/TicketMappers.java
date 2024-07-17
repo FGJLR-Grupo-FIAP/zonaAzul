@@ -5,6 +5,7 @@ import com.tech.challenge.zonaAzul.ticket.form.TicketForm;
 import com.tech.challenge.zonaAzul.ticket.model.entity.Ticket;
 
 import java.util.List;
+import java.util.Objects;
 
 public class TicketMappers {
 
@@ -21,6 +22,7 @@ public class TicketMappers {
 
     public static Ticket ticketMapper(TicketForm ticketForm) {
         Ticket ticket = new Ticket();
+        ticket.setPeriodoEstacionamentoFixo(ticketForm.getQuantidadeHoras() != null && ticketForm.getQuantidadeHoras() > 0);
         ticket.setPagamento(PagamentoMappers.pagamentoMapper(ticketForm.getPagamento()));
         return ticket;
     }

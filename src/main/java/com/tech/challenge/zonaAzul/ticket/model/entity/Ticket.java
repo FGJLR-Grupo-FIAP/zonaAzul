@@ -27,10 +27,7 @@ public class Ticket {
     private BigDecimal valor;
     private UsuarioRecordDTO condutor;
     private Pagamento pagamento;
-
-    public boolean isPeriodoEstacionamentoFixo() {
-        return Objects.nonNull(dataHoraEntrada) && Objects.isNull(dataHoraSaida);
-    }
+    private boolean periodoEstacionamentoFixo;
 
     public void calcularValor(int quantidadeHoras) {
         valor = BigDecimal.valueOf(quantidadeHoras * ZonaAzulConst.PRECO_POR_HORA_ESTACIONADA);
