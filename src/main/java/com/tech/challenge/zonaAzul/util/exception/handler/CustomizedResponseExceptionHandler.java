@@ -2,6 +2,7 @@ package com.tech.challenge.zonaAzul.util.exception.handler;
 
 import com.tech.challenge.zonaAzul.util.exception.DatabaseException;
 import com.tech.challenge.zonaAzul.util.exception.NoSuchRecordException;
+import com.tech.challenge.zonaAzul.util.exception.PaymentMethodException;
 import com.tech.challenge.zonaAzul.util.exception.ValidationRegisterTicketException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -76,6 +77,19 @@ public final class CustomizedResponseExceptionHandler {
                 System.currentTimeMillis(),
                 status.value(),
                 "Erro na validação de argumento",
+                ex.getMessage(),
+                request.getRequestURI()
+        );
+        return ResponseEntity.status(status).body(error);
+    }
+
+    @ExceptionHandler(PaymentMethodException.class)
+    public ResponseEntity<StandardError> paymentMethodValidationException(PaymentMethodException ex, HttpServletRequest request) {
+        final HttpStatus status = HttpStatus.BAD_REQUEST;
+        final StandardError error = new StandardError(
+                System.currentTimeMillis(),
+                status.value(),
+                "Forma de pagamento informada inválida!",
                 ex.getMessage(),
                 request.getRequestURI()
         );
