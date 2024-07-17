@@ -1,8 +1,8 @@
-package com.tech.challenge.zonaAzul.condutor.controller;
+package com.tech.challenge.zonaAzul.ticket.controller;
 
-import com.tech.challenge.zonaAzul.condutor.dto.TicketRecord;
-import com.tech.challenge.zonaAzul.condutor.form.TicketForm;
-import com.tech.challenge.zonaAzul.condutor.model.service.TicketService;
+import com.tech.challenge.zonaAzul.ticket.dto.TicketRecord;
+import com.tech.challenge.zonaAzul.ticket.form.TicketForm;
+import com.tech.challenge.zonaAzul.ticket.model.service.TicketService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

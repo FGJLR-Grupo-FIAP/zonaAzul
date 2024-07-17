@@ -13,7 +13,7 @@ public final class DataUtils {
         return calendar.getTime();
     }
 
-    public static Date obterDataHoraComHoraIncrementada(Date dataHora, int horasPraIncrementar) {
+    public static Date obterDataHoraComHoraIncrementada(final Date dataHora, final int horasPraIncrementar) {
         final Calendar calendar = Calendar.getInstance(TIME_ZONE_GMT);
         calendar.setTime(dataHora);
         calendar.add(Calendar.HOUR_OF_DAY, horasPraIncrementar);

@@ -1,12 +1,13 @@
-package com.tech.challenge.zonaAzul.condutor.model.service;
+package com.tech.challenge.zonaAzul.ticket.model.service;
 
-import com.tech.challenge.zonaAzul.condutor.dto.TicketRecord;
-import com.tech.challenge.zonaAzul.condutor.dto.UsuarioRecordDTO;
-import com.tech.challenge.zonaAzul.condutor.form.TicketForm;
+import com.tech.challenge.zonaAzul.ticket.dto.TicketRecord;
+import com.tech.challenge.zonaAzul.ticket.dto.UsuarioRecordDTO;
+import com.tech.challenge.zonaAzul.ticket.form.TicketForm;
 import com.tech.challenge.zonaAzul.condutor.model.entity.Condutor;
-import com.tech.challenge.zonaAzul.condutor.model.entity.Ticket;
+import com.tech.challenge.zonaAzul.ticket.pagamento.model.service.PagamentoService;
+import com.tech.challenge.zonaAzul.ticket.model.entity.Ticket;
 import com.tech.challenge.zonaAzul.condutor.model.repository.CondutorRepository;
-import com.tech.challenge.zonaAzul.condutor.model.repository.TicketRepository;
+import com.tech.challenge.zonaAzul.ticket.model.repository.TicketRepository;
 import com.tech.challenge.zonaAzul.util.DataUtils;
 import com.tech.challenge.zonaAzul.util.exception.DatabaseException;
 import com.tech.challenge.zonaAzul.util.exception.NoSuchRecordException;
@@ -65,7 +66,7 @@ public class TicketService {
         atribuirTempoSaidaECalcularValorTotalCasoTempoFixoInformado(ticketForm, ticketEntidade);
 
         Condutor condutor = condutorRepository.findByCpf(ticketForm.getCpfCondutor());
-        processarDemaisValidacoes(condutor, ticketEntidade);
+        processarValidacoesComplementares(condutor, ticketEntidade);
 
         try {
             ticketEntidade = repository.insert(ticketEntidade);
@@ -85,7 +86,7 @@ public class TicketService {
         if (!ticketForm.getCpfCondutor().equals(condutor.getCpf())) {
             throw new ValidationRegisterTicketException("Não é possível atualizar um ticket com condutor diferente do informado na hora da compra do mesmo");
         }
-        processarDemaisValidacoes(condutor, ticketEntidade);
+        processarValidacoesComplementares(condutor, ticketEntidade);
 
         try {
             ticketEntidade = repository.save(ticketEntidade);
@@ -108,7 +109,7 @@ public class TicketService {
         }
     }
 
-    private void processarDemaisValidacoes(Condutor condutor, Ticket ticketEntidade) {
+    private void processarValidacoesComplementares(Condutor condutor, Ticket ticketEntidade) {
         validarCadastroCondutor(condutor, false);
         ticketEntidade.setCondutor(new UsuarioRecordDTO(condutor.getNome(), condutor.getCpf()));
         pagamentoService.autorizarPagamento(ticketEntidade.getPagamento());

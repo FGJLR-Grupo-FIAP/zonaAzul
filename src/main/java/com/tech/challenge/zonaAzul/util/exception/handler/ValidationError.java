@@ -1,4 +1,4 @@
-package com.tech.challenge.zonaAzul.condutor.controller.exception;
+package com.tech.challenge.zonaAzul.util.exception.handler;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

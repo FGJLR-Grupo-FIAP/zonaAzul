@@ -1,6 +1,6 @@
-package com.tech.challenge.zonaAzul.condutor.model.service;
+package com.tech.challenge.zonaAzul.ticket.pagamento.model.service;
 
-import com.tech.challenge.zonaAzul.condutor.model.entity.Pagamento;
+import com.tech.challenge.zonaAzul.ticket.pagamento.model.entity.Pagamento;
 import com.tech.challenge.zonaAzul.util.enums.StatusPagamento;
 import org.springframework.stereotype.Service;
 
