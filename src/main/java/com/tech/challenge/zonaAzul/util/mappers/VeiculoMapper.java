@@ -1,8 +1,8 @@
 package com.tech.challenge.zonaAzul.util.mappers;
 
-import com.tech.challenge.zonaAzul.condutor.dto.VeiculoDTO;
-import com.tech.challenge.zonaAzul.condutor.form.VeiculoForm;
-import com.tech.challenge.zonaAzul.condutor.model.entity.Veiculo;
+import com.tech.challenge.zonaAzul.veiculo.dto.VeiculoDTO;
+import com.tech.challenge.zonaAzul.veiculo.form.VeiculoForm;
+import com.tech.challenge.zonaAzul.veiculo.model.entity.Veiculo;
 
 import java.util.ArrayList;
 import java.util.List;

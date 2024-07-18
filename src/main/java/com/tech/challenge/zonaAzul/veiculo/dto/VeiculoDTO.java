@@ -1,4 +1,4 @@
-package com.tech.challenge.zonaAzul.condutor.dto;
+package com.tech.challenge.zonaAzul.veiculo.dto;
 
 public record VeiculoDTO(
         String modelo,

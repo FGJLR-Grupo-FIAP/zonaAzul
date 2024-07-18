@@ -1,6 +1,6 @@
-package com.tech.challenge.zonaAzul.condutor.model.service;
+package com.tech.challenge.zonaAzul.veiculo.model.service;
 
-import com.tech.challenge.zonaAzul.condutor.model.repository.VeiculoRepository;
+import com.tech.challenge.zonaAzul.veiculo.model.repository.VeiculoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

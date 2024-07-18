@@ -1,7 +1,6 @@
-package com.tech.challenge.zonaAzul.condutor.model.repository;
+package com.tech.challenge.zonaAzul.veiculo.model.repository;
 
-import com.tech.challenge.zonaAzul.condutor.model.entity.Veiculo;
-import org.springframework.data.annotation.Id;
+import com.tech.challenge.zonaAzul.veiculo.model.entity.Veiculo;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
